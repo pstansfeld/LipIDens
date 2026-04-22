@@ -39,8 +39,8 @@ mamba create -n lipidens python=3.12 -y
 mamba activate lipidens
 mamba install gromacs gromacswrapper mdanalysis mdtraj -y
 pip install git+https://github.com/marrink-lab/vermouth-martinize.git#vermouth
-pip install git+https://github.com/pstansfeld/pylipid.git#lipidens
-pip install git+https://github.com/pstansfeld/LipIDens.git#lipidens
+pip install git+https://github.com/pstansfeld/pylipid.git
+pip install git+https://github.com/pstansfeld/LipIDens.git
 ```
 
 ---
