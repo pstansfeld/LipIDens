@@ -9,16 +9,15 @@
 # 4-boxsize
 # 5-replicates
 # 6-python3_path
-# 7-dssp_path
-# 8-str(n_cores)
-# 9-path
-# 10-CG_simulation_time
-# 11-martinize2 path
-# 12-forcefield
-# 13-martini_maxwarn 
-# 14-ring_lipids
+# 7-str(n_cores)
+# 8-path
+# 9-CG_simulation_time
+# 10-martinize2 path
+# 11-forcefield
+# 12-martini_maxwarn 
+# 13-ring_lipids
 
-cd ${9}
+cd ${8}
 echo ""
 echo "Setting up coarse-grained simulations:"
 for i in ${5}
@@ -30,7 +29,7 @@ do
     mkdir -p output_files
 
     MDP=../mdp_files
-    simtime=$((${10}*50000000))
+    simtime=$((${9}*50000000))
     sed -i "s/XXX/${simtime%.*}/g" ${MDP}/md.mdp
 
     # Change defaut lincs_iter and lincs_order params if CHOL with virtual sites is present in the membrane
@@ -42,13 +41,13 @@ do
     # OLD Martinize for martini 2 #
     #${6} ../python_files/martinize_gmx2019.py -f ${1} -o system.top -x protein_cg.gro -dssp ${7} -p backbone -ff elnedyn22 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 >& output_files/martinize
 
-    if [ ${12} != "martini_v3.0.0" ]; then
-      ${11} -f ${1} -o system.top -x protein_cg.gro -dssp ${7} -p backbone -ff elnedyn22 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${13} >& output_files/martinize
+    if [ ${11} != "martini_v3.0.0" ]; then
+      ${10} -f ${1} -o system.top -x protein_cg.gro -dssp -p backbone -ff martini22 -noscfix -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${12} >& output_files/martinize
     else
-      ${11} -f ${1} -o system.top -x protein_cg.gro -dssp ${7} -p backbone -ff martini3001 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${13} >& output_files/martinize
+      ${10} -f ${1} -o system.top -x protein_cg.gro -dssp -p backbone -ff martini3001 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${12} >& output_files/martinize
     fi
     
-    if [ ${14} == "True" ]; then
+    if [ ${13} == "True" ]; then
         ${6} ../python_files/insane_mod.py -f protein_cg.gro -o system.gro  -pbc square -box ${4} -center -dm ${2} ${3} -sol W -p tmp.top -ring
     else
         ${6} ../python_files/insane_mod.py -f protein_cg.gro -o system.gro  -pbc square -box ${4} -center -dm ${2} ${3} -sol W -p tmp.top
@@ -64,7 +63,7 @@ do
     gmx genion -s ions.tpr -o system_ions.gro -p system.top -pname NA -nname CL -conc 0.15 -neutral >& output_files/genion <<EOF
 W
 EOF
-    if [ ${12} != "martini_v3.0.0" ]; then
+    if [ ${11} != "martini_v3.0.0" ]; then
       sed 's/\(NA \)\([ \t]*\)\( NA\)/NA+\2\NA+/g' system_ions.gro | sed "s/\(CL \)\([ \t]*\)\( CL\)/CL-\2\CL-/g" > system_ions_corrected.gro
       sed 's/NA  /NA+/g' system.top | sed 's/CL  /CL-/g' > system_corrected.top
     else
@@ -97,12 +96,12 @@ EOF
     # EQ
     echo "Running equilibration-1"
     gmx grompp -f ${MDP}/eq.1.mdp -c em_steep_1.gro -r em_steep_1.gro -p system_corrected.top -n index.ndx -o eq.1.tpr -maxwarn 1 >& output_files/eq1_grompp
-    gmx mdrun -deffnm eq.1 -ntmpi 1 -ntomp ${8} -pin on -pinoffset 0 >& output_files/eq1
+    gmx mdrun -deffnm eq.1 -ntmpi 1 -ntomp ${7} -pin on -pinoffset 0 >& output_files/eq1
     if [[ ! -f eq.1.gro ]]; then echo "Equilibration-1 failed! Try increasing the box dimensions (using the 'boxsize' variable) or adjusting the protein orientation within the bilayer ('protein_shift' and 'protein_rotate' variables)."; fi
 
     echo "Running equilibration-2"
     gmx grompp -f ${MDP}/eq.2.mdp -c eq.1.gro -r eq.1.gro -p system_corrected.top -n index.ndx -o eq.2.tpr -maxwarn 1 >& output_files/eq2_grompp
-    gmx mdrun -deffnm eq.2 -ntmpi 1 -ntomp ${8} -pin on -pinoffset 0 >& output_files/eq2
+    gmx mdrun -deffnm eq.2 -ntmpi 1 -ntomp ${7} -pin on -pinoffset 0 >& output_files/eq2
     if [[ ! -f eq.2.gro ]]; then echo "Equilibration-2 failed! Try increasing the box dimensions (using the 'boxsize' variable) or adjusting the protein orientation within the bilayer ('protein_shift' and 'protein_rotate' variables)."; fi
 
     # MD
