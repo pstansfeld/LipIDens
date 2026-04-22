@@ -56,7 +56,7 @@ pip install -e .
 4. Refine selected lipid poses using atomistic simulations
 5. Interpret lipid‑like cryo‑EM densities in a bilayer context
 
-A worked example is provided in **`LipIDens.ipynb`**.
+A worked example of the full LipIDens protocol is provided in the **[LipIDens workflow notebook](https://github.com/pstansfeld)**.
 
 ---
 
