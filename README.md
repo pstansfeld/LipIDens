@@ -35,6 +35,10 @@ LipIDens then processes these data to guide structural interpretation.
 Python **≥ 3.9** is required.
 
 ```bash
+mamba create -n lipidens python=3.12
+mamba install gromacs gromacswrapper mdanalysis mdtraj 
+pip install pylipid
+pip install vermouth
 git clone https://github.com/pstansfeld/LipIDens.git
 cd LipIDens
 pip install .
