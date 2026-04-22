@@ -86,11 +86,11 @@ if input_step=="1a":
     bilayer=ps.bilayer_select(membrane_composition)
 
     ### Setting up and CG simulations ###
-    python3_path, dssp_path, martinize2_path = ps.get_py_paths(protocol_path)
+    python3_path, martinize2_path = ps.get_py_paths(protocol_path)
     ps.system_setup(protocol_path, path)
-    ps.fetch_CG_itp(forcefield, path)
+    ps.fetch_CG_itp(forcefield, path, protocol_path)
     ps.top_header(forcefield, path)
-    ps.run_CG(protocol_path, protein_AT_full, protein_shift, bilayer, boxsize, replicates, python3_path, dssp_path, n_cores, path, CG_simulation_time, martinize2_path, forcefield, martini_maxwarn, ring_lipids)
+    ps.run_CG(protocol_path, protein_AT_full, protein_shift, bilayer, boxsize, replicates, python3_path, n_cores, path, CG_simulation_time, martinize2_path, forcefield, martini_maxwarn, ring_lipids)
 #############################################
 ### PAUSE POINT - run the CG trajectories ###
 #############################################
