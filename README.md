@@ -74,7 +74,7 @@ A worked example of the full LipIDens protocol is provided in the **[LipIDens wo
 
 **Please cite** the following if you use LipIDens in your research:
 
-Ansell, T.B., Song, W., Coupland, C.E., Carrique, L., Corey, R.A., Duncan, A.L., Cassidy, C.K., Geurts, M.M.G., Rasmussen, T., Ward, A.B., Siebold, C., Stansfeld, P., Sansom, M.S.P. (2022). **LipIDens: Simulation assisted interpretation of lipid densities in cryo-EM structures of membrane proteins.** *Nature Communications* **14**, 7774 (2023).  [doi: 10.1038/s41467-023-43392-y]
+Ansell, T.B., Song, W., Coupland, C.E., Carrique, L., Corey, R.A., Duncan, A.L., Cassidy, C.K., Geurts, M.M.G., Rasmussen, T., Ward, A.B., Siebold, C., Stansfeld, P., Sansom, M.S.P. (2022). **LipIDens: Simulation assisted interpretation of lipid densities in cryo-EM structures of membrane proteins.** *Nature Communications* **14**, 7774 (2023).  [doi: 10.1038/s41467-023-43392-y(https://www.nature.com/articles/s41467-023-43392-y)]
 
 **Accompanying step by step protocol** citation:
 
