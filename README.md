@@ -43,6 +43,10 @@ pip install git+https://github.com/pstansfeld/pylipid.git
 pip install git+https://github.com/pstansfeld/LipIDens.git
 ```
 
+Optional:
+```bash
+mamba install jupyter -y
+```
 ---
 
 ## Typical Workflow
