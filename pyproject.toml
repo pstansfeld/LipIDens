@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lipidens"
+version = "1.1.0"
+description = "Simulation-assisted interpretation of lipid densities in cryo-EM structures"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE.txt" }
+
+authors = [
+  { name = "T. Bertie Ansell et al." }
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "MDAnalysis",
+  "vermouth",
+  "mdtraj",
+  "pylipid"
+]
+
+[project.urls]
+Homepage = "https://github.com/pstansfeld/LipIDens"
+Source = "https://github.com/pstansfeld/LipIDens"
+Publication = "https://doi.org/10.1038/s41467-023-43392-y"
