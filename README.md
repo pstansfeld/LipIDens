@@ -2,11 +2,14 @@
 
 ![logo](lipidens_final_Asset_2.png)
 
-LipIDens is a pipeline for simulation assisted interpretation of lipid or lipid-like densities in e.g. cryogenic electron microscopy (cryo-EM) structures of membrane proteins. The protocol can be used to establish CG simulations, analyse lipid binding sites using [PyLipID](https://github.com/wlsong/PyLipID), screen, rank and process [PyLipID](https://github.com/wlsong/PyLipID) outputs and establish atomistic simulations to refine lipid binding poses.
+**LipIDens** is an open-source pipeline for **simulation-assisted interpretation of lipid and lipid-like densities** observed in cryo-electron microscopy (cryo-EM) structures of membrane proteins.
 
-LipIDens aims to guide the user from 'lipid-like' to 'lipid-site' to assist membrane protein structure interpretation. 
+LipIDens integrates **coarse-grained and atomistic molecular dynamics (MD) simulations** with **PyLipID-based analysis** to identify, characterise, and rank lipid binding sites, enabling experimental densities to be connected to specific lipid chemistries.
 
-## Applications:
+---
+
+## Key Capabilities
+
 - Differentiating between sterol and phospholipid binding sites where structural densities are ambiguous. 
 - Assess preferential binding of different lipid types to a site where lipid-like density is observed.
 - Evaluate whether lipid tail densities are likely to belong to the same or adjacent binding sites. 
@@ -14,49 +17,64 @@ LipIDens aims to guide the user from 'lipid-like' to 'lipid-site' to assist memb
 - Obtain a more complete picture of lipid interactions profiles around the protein in a membrane environment. 
 - Assist interpretation of cryo-EM densities during model building and map refinement cycles. 
 - Assess which putative lipid binding sites may prevail when not in detergent conditions. 
+---
 
-## Installation:
+## Scope of the Pipeline
 
-LipIDens requires a python3 environment (>=3.9 recommended). 
+LipIDens provides **workflow automation and analysis tools**. The user is responsible for:
 
-LipIDens installation from the GitHub repository:
+- Running MD simulations (e.g. with **GROMACS**)
+- Providing trajectories and topology files
+
+LipIDens then processes these data to guide structural interpretation.
+
+---
+
+## Installation
+
+Python **≥ 3.9** is required.
+
 ```bash
-git clone https://github.com/TBGAnsell/LipIDens
+git clone https://github.com/pstansfeld/LipIDens.git
 cd LipIDens
-python setup.py install
+pip install .
 ```
 
-#### Recomended
-
-Recommended to use dssp version 3 as this is the only current version compatible with martinize2. Check your version using `mkdssp --version`.
+For development:
 
 ```bash
-conda install -c salilab dssp
+pip install -e .
 ```
 
+---
 
-Conda (legacy installation):
-```bash
-conda create -n LipIDens python=3.9
-pip install -r requirements.txt
-```
-## Usage:
+## Typical Workflow
 
-Detailed steps for the usage and implementation of LidIDens are provided within the accompanying protocols manuscript (see citation below). 
+1. Prepare a membrane protein system and run coarse‑grained MD simulations
+2. Analyse lipid interactions using PyLipID via LipIDens
+3. Screen and rank lipid binding sites
+4. Refine selected lipid poses using atomistic simulations
+5. Interpret lipid‑like cryo‑EM densities in a bilayer context
 
-LipIDens can be run using the standalone `lipidens_master_run.py` (user inputs variables to terminal) or `master_run.py` (define variables within script a priori) scripts. 
+A worked example is provided in **`LipIDens.ipynb`**.
 
-`python lipidens_master_run.py`
+---
 
-Select the required protocol stage when prompted. 
+## Dependencies
 
-In addition, a jupyter notebook tutorial is provided to assist implementation (`LipIDens.ipynb`). 
+- Python ≥ 3.9
+- PyLipID
+- MDAnalysis
+- GROMACS (user‑run, not installed by pip)
+- MARTINI force field
 
-## Citation:
+---
 
-**Please cite** the following if elements of the LipIDens protocol are used:
+## Citation
 
-Ansell, T.B., Song, W., Coupland, C.E., Carrique, L., Corey, R.A., Duncan, A.L., Cassidy, C.K., Geurts, M.M.G., Rasmussen, T., Ward, A.B., Siebold, C., Stansfeld, P., Sansom, M.S.P. (2022). **LipIDens: Simulation assisted interpretation of lipid densities in cryo-EM structures of membrane proteins.** bioRxiv, [doi: 10.1101/2022.06.30.498233](https://www.biorxiv.org/content/10.1101/2022.06.30.498233v1)
+**Please cite** the following if you use LipIDens in your research:
+
+Ansell, T.B., Song, W., Coupland, C.E., Carrique, L., Corey, R.A., Duncan, A.L., Cassidy, C.K., Geurts, M.M.G., Rasmussen, T., Ward, A.B., Siebold, C., Stansfeld, P., Sansom, M.S.P. (2022). **LipIDens: Simulation assisted interpretation of lipid densities in cryo-EM structures of membrane proteins.** *Nature Communications* **14**, 7774 (2023).  [doi: 10.1038/s41467-023-43392-y]
 
 **Accompanying step by step protocol** citation:
 
@@ -64,3 +82,8 @@ Ansell, T.B., Song, W., Coupland, C.E., Carrique, L., Corey, R.A., Duncan, A.L.,
 
 The LipIDens logo was designed by Jessica Ansell. 
 
+---
+
+## License
+
+LipIDens is released under the MIT License.
