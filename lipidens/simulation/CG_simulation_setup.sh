@@ -40,8 +40,8 @@ do
 
     # OLD Martinize for martini 2 #
     #${6} ../python_files/martinize_gmx2019.py -f ${1} -o system.top -x protein_cg.gro -dssp ${7} -p backbone -ff elnedyn22 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 >& output_files/martinize
-
-    if [ ${11} != "martini_v3.0.0" ]; then
+    echo ${11}
+    if [ ${11} != "martini_v3.0.0" ] && [ ${11} != "martini_v3.0.0NL" ]; then
       ${10} -f ${1} -o system.top -x protein_cg.gro -dssp -p backbone -ff martini22 -noscfix -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${12} >& output_files/martinize
     else
       ${10} -f ${1} -o system.top -x protein_cg.gro -dssp -p backbone -ff martini3001 -cys auto -ef 1000 -el 0.5 -eu 0.9 -ea 0 -ep 0 -maxwarn ${12} >& output_files/martinize
@@ -63,7 +63,7 @@ do
     gmx genion -s ions.tpr -o system_ions.gro -p system.top -pname NA -nname CL -conc 0.15 -neutral >& output_files/genion <<EOF
 W
 EOF
-    if [ ${11} != "martini_v3.0.0" ]; then
+    if [ ${11} != "martini_v3.0.0" ] && [ ${11} != "martini_v3.0.0NL" ]; then
       sed 's/\(NA \)\([ \t]*\)\( NA\)/NA+\2\NA+/g' system_ions.gro | sed "s/\(CL \)\([ \t]*\)\( CL\)/CL-\2\CL-/g" > system_ions_corrected.gro
       sed 's/NA  /NA+/g' system.top | sed 's/CL  /CL-/g' > system_corrected.top
     else

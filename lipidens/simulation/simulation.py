@@ -102,6 +102,13 @@ def fetch_CG_itp(forcefield, path, protocol_path):
             dirs_exist_ok=True
         )
 
+    elif forcefield == "martini_v3.0.0NL":
+
+        shutil.copy(
+            f"{protocol_path}/simulation/martini_v3.0.0NL.itp",
+            f"{path}/itp_files/martini_v3.0.0NL.itp"
+        )
+
     else:
         print(
             "Error with topology file download for the specified CG forcefield – "
@@ -199,14 +206,14 @@ def run_CG(protocol_path, protein_AT_full, protein_shift, bilayer, boxsize, repl
     protein_AT_full=os.path.join(os.getcwd(), protein_AT_full)
     repstr=np.arange(1, replicates+1)
     repstr=' '.join(map(str, repstr))
-    subprocess.check_call(["{}/simulation/CG_simulation_setup.sh".format(protocol_path), protein_AT_full, str(protein_shift), bilayer, boxsize, repstr, python3_path, str(n_cores), path, str(CG_simulation_time), martinize2_path, str(forcefield),str(martini_maxwarn), ring_lipids])
+    subprocess.check_call(["{}/simulation/CG_simulation_setup.sh".format(protocol_path), protein_AT_full, str(protein_shift), bilayer, boxsize, repstr, python3_path, str(n_cores), path, str(CG_simulation_time), martinize2_path, str(forcefield), str(martini_maxwarn), ring_lipids])
     for i in range(1, replicates+1):
         print(f"\n After initial setup attempt for run{i}:")
         if os.path.isfile(f"{path}/run{i}/protein_cg.gro"):
             print("\nmartinize (coarse-graining) was successful")
             if not os.path.isfile(f"{path}/run{i}/md.tpr"):
                 print(f"run{i}/md.tpr not generated - retrying replicate simulation setup")
-                subprocess.check_call(["{}/simulation/CG_simulation_setup.sh".format(protocol_path), protein_AT_full, str(protein_shift), bilayer, boxsize, str(i), python3_path, str(n_cores), path, str(CG_simulation_time), martinize2_path, str(forcefield),str(martini_maxwarn), ring_lipids])
+                subprocess.check_call(["{}/simulation/CG_simulation_setup.sh".format(protocol_path), protein_AT_full, str(protein_shift), bilayer, boxsize, str(i), python3_path, str(n_cores), path, str(CG_simulation_time), martinize2_path, str(forcefield), str(martini_maxwarn), ring_lipids])
                 if not os.path.isfile(f"{path}/run{i}/md.tpr"):
                     print(f"\nsecond setup attempt for run{i} was not successful, please check the outputs")
                 
