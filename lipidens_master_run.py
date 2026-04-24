@@ -62,7 +62,8 @@ if input_step=="1a":
     forcefield_dict={"1": "martini_v2.0",
                      "2": "martini_v2.1",
                      "3": "martini_v2.2",
-                     "4": "martini_v3.0.0"}
+                     "4": "martini_v3.0.0",
+                     "5": "martini_v3.0.0NL"}
 
     print(*[f"\n{key}: {val}" for key, val in forcefield_dict.items()])
     forcefield=forcefield_dict[str(input("\nSelect forcefield:"))]
@@ -75,7 +76,7 @@ if input_step=="1a":
     CG_simulation_time=int(input("\nCoarse grain simulation time (in us) (default: 15): ") or 15)
     replicates=int(input("Number of replicates (default: 10): ") or 10)
 
-    n_cores=int(input("Number of CPU to use (default: 16): ") or 16)
+    n_cores=int(input("Number of CPU to use (default: 18): ") or 18)
 
 
     #############################
