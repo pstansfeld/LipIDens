@@ -1,9 +1,9 @@
 # Python dependencies (also installed by `pip install .`). GROMACS, pdb2pqr, CG2AT (or cg2at-lite) and
 # PyMOL are separate tools: see README.md.
 numpy>=1.24
-pandas>=2.0
+pandas>=2.0,<3
 matplotlib>=3.5
 seaborn>=0.12
 mdtraj>=1.9.7
 pylipid>=1.6.0
-vermouth>=0.7.2
+vermouth>=0.10.0

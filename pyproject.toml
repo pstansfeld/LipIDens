@@ -23,13 +23,14 @@ classifiers = [
 ]
 dependencies = [
   "numpy>=1.24",
-  "pandas>=2.0",
+  "pandas>=2.0,<3",
   "matplotlib>=3.5",
   "seaborn>=0.12",
   "mdtraj>=1.9.7",
   "pylipid>=1.6.0",
-  # provides the martinize2 command used to build coarse-grained proteins
-  "vermouth>=0.7.2",
+  # provides the martinize2 command used to build coarse-grained proteins; from 0.10 `-dssp` without a
+  # path assigns secondary structure with mdtraj (no DSSP executable needed)
+  "vermouth>=0.10.0",
 ]
 
 [project.scripts]
