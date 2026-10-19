@@ -1,6 +1,6 @@
 # LipIDens - simulation assisted interpretation of lipid densities 
 
-![logo](lipidens_final_Asset_2.png)
+![logo](https://raw.githubusercontent.com/pstansfeld/LipIDens/main/lipidens_final_Asset_2.png)
 
 LipIDens is an open-source pipeline for simulation-assisted interpretation of lipid and lipid-like densities observed in cryo-electron microscopy (cryo-EM) structures of membrane proteins.
 
@@ -28,16 +28,18 @@ For detailed instructions on LipIDens Installation please refer to the latest ve
 
 [Latest LipIDens Version and Installation](https://github.com/pstansfeld/LipIDens/), updated October 2026 (version 1.2.0)
 
-LipIDens requires a python3 environment (**>= 3.11**). LipIDens is not on PyPI: install it from this GitHub repository.
+LipIDens requires a python3 environment (**>= 3.11**). Install it from PyPI:
 
 ```bash
 mamba create -n lipidens python=3.12 -y
 mamba activate lipidens
 mamba install -c conda-forge gromacs pdb2pqr -y
-pip install git+https://github.com/pstansfeld/LipIDens.git
+pip install lipidens
 ```
 
-This installs LipIDens with its Python dependencies, including [PyLipID](https://github.com/pstansfeld/PyLipID) (>= 1.6) and [vermouth](https://github.com/marrink-lab/vermouth-martinize) (`martinize2`), together with the workflow scripts and parameter files it uses. See [README_INSTALL.md](README_INSTALL.md) for installing from a clone.
+or install the latest development version with `pip install git+https://github.com/pstansfeld/LipIDens.git`.
+
+This installs LipIDens with its Python dependencies, including [PyLipID](https://github.com/pstansfeld/PyLipID) (>= 1.6) and [vermouth](https://github.com/marrink-lab/vermouth-martinize) (`martinize2`), together with the workflow scripts and parameter files it uses. See [README_INSTALL.md](https://github.com/pstansfeld/LipIDens/blob/main/README_INSTALL.md) for installing from a clone.
 
 For the atomistic stages (backmapping lipid poses in stage 5 and setting up atomistic simulations in stage 6) also install [cg2at-lite](https://github.com/pstansfeld/cg2at-lite) (`pip install cg2at-lite`); the original [CG2AT](https://github.com/owenvickery/cg2at) is used instead if cg2at-lite is not installed. Comparing poses with densities (stage 5) writes a [PyMOL](https://pymol.org) script.
 
@@ -49,7 +51,7 @@ Run the protocol interactively, stage by stage (1a/1b: coarse-grained setup and 
 lipidens
 ```
 
-(or `python lipidens_master_run.py` from a clone of this repository), or follow the [LipIDens workflow notebook](LipIDens.ipynb).
+(or `python lipidens_master_run.py` from a clone of this repository), or follow the [LipIDens workflow notebook](https://github.com/pstansfeld/LipIDens/blob/main/LipIDens.ipynb).
 
 If you write your own scripts that call LipIDens or PyLipID, put the code under `if __name__ == "__main__":`: PyLipID calculates in worker processes that re-import the script.
 
